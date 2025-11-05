@@ -5,5 +5,14 @@
   <h1>Hello, {{ title() }}</h1>
 </main>
 
+<div class="search-container">
+    <input
+      type="text"
+      [(ngModel)]="searchStore"
+      placeholder="Store Name..."
+      class="search-input"
+    />
+    <button (click)="onSearch()" class="search-button">Search</button>
+  </div>
 
 <router-outlet />
