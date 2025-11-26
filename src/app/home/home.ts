@@ -16,6 +16,7 @@ import { FormsModule } from '@angular/forms';
 })
 export class Home {
 
+  protected readonly homeTitle = signal('DiFi - Home');
   searchStore: string = '';
   status: any;
 
