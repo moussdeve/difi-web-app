@@ -1,0 +1,18 @@
+<mat-toolbar color="primary">
+  <button mat-icon-button (click)="drawer.toggle()" class="mobile-toggle">
+    <mat-icon>menu</mat-icon>
+  </button>
+  <span class="brand">DiFi</span>
+  <span class="spacer"></span>
+  <nav class="desktop-nav">
+    <a *ngFor="let link of links" mat-button [routerLink]="link.path">{{ link.label }}</a>
+  </nav>
+</mat-toolbar>
+
+<mat-sidenav-container>
+  <mat-sidenav #drawer mode="over" class="mobile-nav">
+    <a *ngFor="let link of links" mat-list-item [routerLink]="link.path" (click)="drawer.close()">
+      {{ link.label }}
+    </a>
+  </mat-sidenav>
+</mat-sidenav-container>

@@ -1,18 +1,15 @@
-<style>
+<!-- <style>
 </style>
 
 <main>
-  <h1>Hello, {{ title() }}</h1>
-</main>
+ <h1>Hello, {{ title() }}</h1>
 
-<div class="search-container">
-    <input
-      type="text"
-      [(ngModel)]="searchStore"
-      placeholder="Store Name..."
-      class="search-input"
-    />
-    <button (click)="onSearch()" class="search-button">Search</button>
-  </div>
+  <nav>
+    <a routerLink="/home">home</a>
+    <a routerLink="/about">about</a>
+    <a routerLink="/admin">admin</a>
+  </nav>
+</main> -->
 
+<app-navbar></app-navbar>
 <router-outlet />
