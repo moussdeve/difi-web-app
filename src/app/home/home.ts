@@ -14,9 +14,7 @@ import { EntityDiscountCode } from '../entity-discount-code/entity-discount-code
     EntityDiscountCode
   ],
   // template: `
-  //   <p>
-  //     home works!
-  //   </p>
+  //   
   // `,
   templateUrl: './home.html',
   styleUrl: './home.css'

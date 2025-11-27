@@ -5,11 +5,12 @@ import { Discountcode } from '../discountcode';
 @Component({
   selector: 'app-entity-discount-code',
   imports: [],
-  template: `
-    <p>
-      entity-discount-code works!
-    </p>
-  `,
+  // template: `
+  //   <p>
+  //     entity-discount-code works!
+  //   </p>
+  // `,
+  templateUrl: './entity-discount-code.html',
   styleUrl: './entity-discount-code.css'
 })
 export class EntityDiscountCode {
