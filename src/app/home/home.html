@@ -2,10 +2,14 @@
 </style>
 
 <main>
-    
+
   <section>
         <input type="text" [(ngModel)]="searchStore" placeholder="Enter Store Name...">
         <button (click)="onSearch()" class="primary" type="button">Search</button>
+  </section>
+
+  <section class="reults">
+    <app-entity-discount-code></app-entity-discount-code>
   </section>
 
 </main>

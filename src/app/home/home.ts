@@ -1,10 +1,15 @@
-import { Component, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
+import { Component, signal } from '@angular/core';
+import { EntityDiscountCode } from '../entity-discount-code/entity-discount-code';
+
 
 @Component({
   selector: 'app-home',
   imports: [
-    FormsModule
+    CommonModule,
+    FormsModule,
+    EntityDiscountCode
   ],
   // template: `
   //   <p>
