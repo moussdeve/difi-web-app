@@ -9,7 +9,11 @@
   </section>
 
   <section class="reults">
-    <app-entity-discount-code [discountCode]="discountCode"></app-entity-discount-code>
+    @for (discountCode of discountCodeList; track discountCode.code) {
+      <app-entity-discount-code 
+        [discountCode]="discountCode">
+      </app-entity-discount-code>
+    }
   </section>
 
 </main>
