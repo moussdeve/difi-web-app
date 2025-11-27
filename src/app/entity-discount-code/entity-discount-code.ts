@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, Input, input } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { Discountcode } from '../discountcode';
 
 @Component({
   selector: 'app-entity-discount-code',
@@ -11,5 +13,5 @@ import { Component } from '@angular/core';
   styleUrl: './entity-discount-code.css'
 })
 export class EntityDiscountCode {
-
+  @Input() discountCode!: Discountcode;
 }
