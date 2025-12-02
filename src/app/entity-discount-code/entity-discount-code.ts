@@ -1,6 +1,6 @@
 import { Component, Input, input } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Discountcode } from '../discountcode';
+import { DiscountCode } from '../discountcode';
 import { RouterLink } from "@angular/router";
 
 @Component({
@@ -15,5 +15,5 @@ import { RouterLink } from "@angular/router";
   styleUrl: './entity-discount-code.css'
 })
 export class EntityDiscountCode {
-  @Input() discountCode!: Discountcode;
+  @Input() discountCode!: DiscountCode;
 }

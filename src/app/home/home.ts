@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { Component, signal, Inject, importProvidersFrom, inject } from '@angular/core';
 
 import { Code } from '../code'
-import { Discountcode } from '../discountcode';
+import { DiscountCode } from '../discountcode';
 import { EntityDiscountCode } from '../entity-discount-code/entity-discount-code';
 
 @Component({
@@ -26,7 +26,7 @@ export class Home {
   searchStore: string = '';
   status: any;
 
-  discountCodeList: Discountcode[] = [];
+  discountCodeList: DiscountCode[] = [];
   discountService: Code = inject(Code);
 
   constructor() {

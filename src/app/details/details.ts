@@ -1,7 +1,7 @@
 import { Component, inject, Inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
-import { Discountcode } from '../discountcode';
+import { DiscountCode } from '../discountcode';
 import { Code } from '../code'
 
 @Component({
@@ -13,9 +13,11 @@ import { Code } from '../code'
 export class Details {
 
   route: ActivatedRoute = inject(ActivatedRoute);
-  discountCodeName: string = "default";
+  discountService: Code = inject(Code);
+  discountCode: DiscountCode | undefined;
 
   constructor() {
-    this.discountCodeName = String(this.route.snapshot.params['code']);
+    const discountCodeName = String(this.route.snapshot.params['code']);
+    this.discountCode = this.discountService.getDiscountCodeByName(discountCodeName);
   }
 }

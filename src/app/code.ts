@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
-import { Discountcode } from './discountcode';
+import { DiscountCode } from './discountcode';
 
 @Injectable({
   providedIn: 'root'
 })
 export class Code {
-  discountCodeList: Discountcode[] = [
+  discountCodeList: DiscountCode[] = [
     {
       code: 'WELCOME30',
       type: 'Coupon',
@@ -39,7 +39,7 @@ export class Code {
   ];
 
   // Returns all discount codes associated with the store
-  getAllCodes(): Discountcode[] {
+  getAllCodes(): DiscountCode[] {
     return this.discountCodeList;
   }
 
@@ -49,7 +49,7 @@ export class Code {
   // }
 
   // Get discount code by code name/string
-  getCodeCodeByName(dc: string): Discountcode | undefined {
+  getDiscountCodeByName(dc: string): DiscountCode | undefined {
     return this.discountCodeList.find(cc => cc.code === dc);
   }
   
