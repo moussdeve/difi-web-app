@@ -3,4 +3,5 @@
     <h5 class="discount-heading">Type: {{ discountCode.type }}</h5>
     <h5 class="discount-heading">Coup: {{ discountCode.discount }}</h5>
     <h5 class="discount-heading">Summ: {{ discountCode.summary }}</h5>
+    <a [routerLink]="['/details', discountCode.code]">Details</a>
 </section>

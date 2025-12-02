@@ -1,10 +1,11 @@
 import { Component, Input, input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Discountcode } from '../discountcode';
+import { RouterLink } from "@angular/router";
 
 @Component({
   selector: 'app-entity-discount-code',
-  imports: [],
+  imports: [RouterLink],
   // template: `
   //   <p>
   //     entity-discount-code works!

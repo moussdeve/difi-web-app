@@ -1,6 +1,6 @@
-import { Component, OnInit, signal, inject, NgModule } from '@angular/core';
+import { Component, signal} from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { RouterOutlet } from "@angular/router";
+import { RouterOutlet, RouterModule } from "@angular/router";
 
 import { Navbar } from "./navbar/navbar";
 
@@ -9,7 +9,8 @@ import { Navbar } from "./navbar/navbar";
   imports: [
     FormsModule,
     RouterOutlet,
-    Navbar
+    Navbar,
+    RouterModule
 ],
   templateUrl: './app.html',
   styleUrl: './app.css'

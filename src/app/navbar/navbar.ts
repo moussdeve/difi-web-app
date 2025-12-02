@@ -28,5 +28,6 @@ export class Navbar {
     { path: '/home', label: 'Home' },
     { path: '/about', label: 'About' },
     { path: '/admin', label: 'Admin' },
+    // { path: '/details:code', label: 'Details'}
   ]
 }
