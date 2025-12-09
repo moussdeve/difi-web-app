@@ -7,6 +7,7 @@
       <h2 class="discount-heading">{{discountCode?.code}}</h2>
       <p class="discount-code">{{discountCode?.discount}}, {{discountCode?.code}}</p>
     </section>
+
     <section class="discount-features">
       <h2 class="section-heading">About this discount code</h2>
       <ul>
@@ -16,4 +17,20 @@
         <li>Discount type: {{discountCode?.type}}</li>
       </ul>
     </section>
+
+    <section class="listing-apply">
+      <h2 class="section-heading">Send this discount code to yourself or a friend</h2>
+      <form [formGroup]="sendCodeForm" (submit)="sendCode()">
+        <label for="first-name">First Name</label>
+        <input id="first-name" type="text" formControlName="firstName">
+
+        <label for="last-name">Last Name</label>
+        <input id="last-name" type="text" formControlName="lastName">
+
+        <label for="email">Email</label>
+        <input id="email" type="email" formControlName="email">
+        <button type="submit" class="primary">Send</button>
+      </form>
+    </section>
+
 </article>

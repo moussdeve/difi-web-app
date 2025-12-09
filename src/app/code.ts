@@ -1,3 +1,6 @@
+/**
+ * Discount Code Service Class: 
+ */
 import { Injectable } from '@angular/core';
 import { DiscountCode } from './discountcode';
 
@@ -51,6 +54,11 @@ export class Code {
   // Get discount code by code name/string
   getDiscountCodeByName(dc: string): DiscountCode | undefined {
     return this.discountCodeList.find(cc => cc.code === dc);
+  }
+
+  // Method to send form data
+  sendCode(firstName: string, lastName: string, email: string) {
+    console.log(`Discount Code application received: firstName: ${firstName}, lastName: ${lastName}, email: ${email}.`);
   }
   
 }
