@@ -27,14 +27,27 @@ export class Home {
   status: any;
 
   discountCodeList: DiscountCode[] = [];
+  filteredDiscountList: DiscountCode[] = [];
   discountService: Code = inject(Code);
 
   constructor() {
     this.discountCodeList = this.discountService.getAllCodes();
+    this.filteredDiscountList = this.discountCodeList;
   }
 
   onSearch(): void {
     console.log('Searching for: ', this.searchStore);
+  }
+
+  filterResults(text: string) {
+    if (!text) {
+      this.filteredDiscountList = this.discountCodeList;
+      return;
+    }
+
+    this.filteredDiscountList = this.discountCodeList.filter(
+      discountCode => discountCode?.code.toLowerCase().includes(text.toLowerCase())
+    );
   }
 
 }

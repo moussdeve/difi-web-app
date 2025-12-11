@@ -8,8 +8,13 @@
         <button (click)="onSearch()" class="primary" type="button">Search</button>
   </section>
 
+  <section>
+    <input type="text" placeholder="Filter by keyword..." #filter>
+    <button class="primary" type="button" (click)="filterResults(filter.value)">Filter</button>
+  </section>
+
   <section class="reults">
-    @for (discountCode of discountCodeList; track discountCode.code) {
+    @for (discountCode of filteredDiscountList; track discountCode.code) {
       <app-entity-discount-code 
         [discountCode]="discountCode">
       </app-entity-discount-code>
