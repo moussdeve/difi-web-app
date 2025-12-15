@@ -4,12 +4,14 @@ import { provideRouter } from '@angular/router';
 import { appConfig } from './app/app.config';
 import { routes } from './app/app.routes'
 import { App } from './app/app';
+import { provideHttpClient } from '@angular/common/http';
 
 bootstrapApplication(App, {
   providers: [
     provideProtractorTestingSupport(),
     provideRouter(routes),
-    provideZonelessChangeDetection()
+    provideZonelessChangeDetection(),
+    provideHttpClient()
   ]
 })
 .catch((err) => console.error(err));

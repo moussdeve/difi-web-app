@@ -31,11 +31,13 @@ export class Home {
   discountService: Code = inject(Code);
 
   constructor() {
+    this.status = this.discountService.getStatus();
     this.discountCodeList = this.discountService.getAllCodes();
     this.filteredDiscountList = this.discountCodeList;
   }
 
   onSearch(): void {
+    console.log('Status: ', this.status)
     console.log('Searching for: ', this.searchStore);
   }
 

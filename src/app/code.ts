@@ -3,11 +3,16 @@
  */
 import { Injectable } from '@angular/core';
 import { DiscountCode } from './discountcode';
+import { stat } from 'node:fs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class Code {
+
+  baseUrl = "http://localhost:8080/dap/api/v1.0/des/status";
+  statusEx = "status";
+
   discountCodeList: DiscountCode[] = [
     {
       code: 'WELCOME30',
@@ -59,6 +64,12 @@ export class Code {
   // Method to send form data
   sendCode(firstName: string, lastName: string, email: string) {
     console.log(`Discount Code application received: firstName: ${firstName}, lastName: ${lastName}, email: ${email}.`);
+  }
+
+  async getStatus(): Promise<any> {
+    console.log('base url: ', this.baseUrl);
+    const status = await fetch(this.baseUrl);
+    return await status.json.toString() ?? 'DAP-DES Service Down';
   }
   
 }
