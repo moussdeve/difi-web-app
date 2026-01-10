@@ -4,7 +4,6 @@
 import { inject, Injectable, OnInit } from '@angular/core';
 import { PromoCode } from './PromoCode';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
