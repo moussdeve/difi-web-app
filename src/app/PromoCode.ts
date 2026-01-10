@@ -1,4 +1,4 @@
-export interface DiscountCode {
+export interface PromoCode {
     code: string;
     type: string;
     summary: string;

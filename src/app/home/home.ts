@@ -1,9 +1,9 @@
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { Component, signal, Inject, importProvidersFrom, inject } from '@angular/core';
+import { Component, signal, OnInit } from '@angular/core';
 
-import { Code } from '../code'
-import { DiscountCode } from '../discountcode';
+import { PromoService } from '../PromoService'
+import { PromoCode } from '../PromoCode';
 import { EntityDiscountCode } from '../entity-discount-code/entity-discount-code';
 
 @Component({
@@ -19,21 +19,38 @@ import { EntityDiscountCode } from '../entity-discount-code/entity-discount-code
   templateUrl: './home.html',
   styleUrl: './home.css'
 })
-export class Home {
+export class Home implements OnInit {
 
   protected readonly homeTitle = signal('DiFi - Home');
-  readonly baseUrl = 'localhost:8080/dap/api/v1.0/des/promoco';
   searchStore: string = '';
   status: any;
 
-  discountCodeList: DiscountCode[] = [];
-  filteredDiscountList: DiscountCode[] = [];
-  discountService: Code = inject(Code);
+  discountCodeList: PromoCode[] = [];
+  filteredDiscountList: PromoCode[] = [];
+  // discountService: Code = inject(Code);
 
-  constructor() {
-    this.status = this.discountService.getStatus();
-    this.discountCodeList = this.discountService.getAllCodes();
-    this.filteredDiscountList = this.discountCodeList;
+  constructor(private discountService: PromoService) {}
+
+  async ngOnInit() {
+    // (await this.discountService.getStatus()).subscribe((data: any) => {
+    //   this.status = data;
+    //   console.log('Service status data: ', this.status);
+    // });
+    this.getStatus();
+    this.getFilteredList();
+    // this.discountCodeList = this.discountService.getAllCodes();
+    // this.filteredDiscountList = this.discountCodeList;
+  }
+
+  public getStatus() {
+    this.discountService.getStatus().subscribe((data: any) => {
+      this.status = data;
+      console.log('Service status data: ', this.status);
+    });
+  }
+
+  public getFilteredList(): PromoCode[] {
+    return this.filteredDiscountList;
   }
 
   onSearch(): void {

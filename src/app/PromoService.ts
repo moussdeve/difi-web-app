@@ -1,19 +1,20 @@
 /**
  * Discount Code Service Class: 
  */
-import { Injectable } from '@angular/core';
-import { DiscountCode } from './discountcode';
-import { stat } from 'node:fs';
+import { inject, Injectable, OnInit } from '@angular/core';
+import { PromoCode } from './PromoCode';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
-export class Code {
+export class PromoService{
 
-  baseUrl = "http://localhost:8080/dap/api/v1.0/des/status";
-  statusEx = "status";
+  private http = inject(HttpClient);
+  private readonly baseUrl = "http://localhost:8080/dap/api/v1.0/des/status";
 
-  discountCodeList: DiscountCode[] = [
+  discountCodeList: PromoCode[] = [
     {
       code: 'WELCOME30',
       type: 'Coupon',
@@ -46,18 +47,24 @@ export class Code {
     }
   ];
 
+  // constructor(private http: HttpClient) { }
+  // // ngOnInit(): void {
+  // //   this.getAllCodes();
+  // //   this.getStatus();
+  // // }
+
   // Returns all discount codes associated with the store
-  getAllCodes(): DiscountCode[] {
+  getAllCodes(): PromoCode[] {
     return this.discountCodeList;
   }
 
   // // TODO: return discount code by id
-  // getCodeById(id: number): Discountcode | undefined {
+  // getCodeById(id: number): PromoCode | undefined {
   //   return this.discountCodeList.find(dc => dc.id === id);
   // }
 
   // Get discount code by code name/string
-  getDiscountCodeByName(dc: string): DiscountCode | undefined {
+  getDiscountCodeByName(dc: string): PromoCode | undefined {
     return this.discountCodeList.find(cc => cc.code === dc);
   }
 
@@ -66,10 +73,10 @@ export class Code {
     console.log(`Discount Code application received: firstName: ${firstName}, lastName: ${lastName}, email: ${email}.`);
   }
 
-  async getStatus(): Promise<any> {
-    console.log('base url: ', this.baseUrl);
-    const status = await fetch(this.baseUrl);
-    return await status.json.toString() ?? 'DAP-DES Service Down';
+  public getStatus(): any {
+    return this.http.get<any[]>(
+      this.baseUrl,
+      {responseType: 'text' as 'json'});
   }
   
 }

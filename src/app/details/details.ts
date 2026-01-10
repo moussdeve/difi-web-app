@@ -2,8 +2,8 @@ import { Component, inject, Inject } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
-import { DiscountCode } from '../discountcode';
-import { Code } from '../code'
+import { PromoCode } from '../PromoCode';
+import { PromoService } from '../PromoService'
 
 @Component({
   selector: 'app-details',
@@ -17,8 +17,8 @@ import { Code } from '../code'
 export class Details {
 
   route: ActivatedRoute = inject(ActivatedRoute);
-  discountService: Code = inject(Code);
-  discountCode: DiscountCode | undefined;
+  discountService: PromoService = inject(PromoService);
+  discountCode: PromoCode | undefined;
 
   // create the form object
   sendCodeForm = new FormGroup({
