@@ -44,7 +44,9 @@ export class PromoService{
   // Returns all discount codes associated with the store
   getAllCodes(storeName: string): PromoCode[] {
 
-    this.http.get<PromoCode[]>(this.baseUrl.concat(this.CODE_API, storeName), { responseType: 'json' })
+    this.http.get<PromoCode[]>(this.baseUrl.concat(this.CODE_API, storeName), {
+        withCredentials: true
+    })
       .subscribe((data: PromoCode[]) => {
         this.discountCodeList = data;
       });
@@ -83,8 +85,8 @@ export class PromoService{
   authenticateUser() {
 
     const loginData = {
-      // username: "<username>",
-      // password: "<password>"
+      // username: "<YOUR_USERNAME>",
+      // password: "<YOUR_PASSWORD>"
     };
 
     // return this.http.post<LoginResponse>(
