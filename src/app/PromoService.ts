@@ -5,77 +5,94 @@ import { inject, Injectable, OnInit } from '@angular/core';
 import { PromoCode } from './PromoCode';
 import { HttpClient } from '@angular/common/http';
 
+
+// Login response interface
+interface LoginResponse {
+  token: string;
+  username: string;
+  type: string;
+}
+
+
+// Status response interface
+interface StatusResponse {
+  status: string;
+  timestamp: string;
+}
+
 @Injectable({
   providedIn: 'root'
 })
 export class PromoService{
 
   private http = inject(HttpClient);
-  private readonly baseUrl = "http://localhost:8080/dap/api/v1.0/des/status";
 
-  discountCodeList: PromoCode[] = [
-    {
-      code: 'WELCOME30',
-      type: 'Coupon',
-      summary: 'Best for new customers; a free gift is also often included.',
-      discount: '30% Off + Free Shipping'
-    },
-    {
-      "code": "WELCOME20",
-      "type": "Coupon",
-      "summary": "Another common welcome offer for new customers.",
-      "discount": "20% Off + Free Shipping"
-    },
-    {
-      "code": "CLEAN30",
-      "type": "Coupon",
-      "summary": "A general, high-value discount code.",
-      "discount": "30% Off Your Order"
-    },
-    {
-      "code": "TRYGROVE",
-      "type": "Coupon",
-      "summary": "Pay only for the shipping of your VIP trial items.",
-      "discount": "Free Starter Kit + Free Shipping"
-    },
-    {
-      "code": "SHIPFREE",
-      "type": "Coupon",
-      "summary": "Usually requires a minimum purchase (e.g., $49).",
-      "discount": "Free Shipping on Your Order"
-    }
-  ];
+  // DAP-AUTH API endpoints
+  private readonly LOGIN_API = "/login";
+  private readonly AUTH_API = "http://localhost:8080/dap/api/v1.0/auth";
 
-  // constructor(private http: HttpClient) { }
-  // // ngOnInit(): void {
-  // //   this.getAllCodes();
-  // //   this.getStatus();
-  // // }
+  // DAP-DES API endpoints
+  private readonly CODE_API = "/promoco?store=";
+  private readonly STATUS_API = "/status";
+  private readonly baseUrl = "http://localhost:8080/dap/api/v1.0/des";
+
+  discountCodeList: PromoCode[] = [];
+  private loginResponse: LoginResponse | undefined;
+
+  constructor() {}
 
   // Returns all discount codes associated with the store
-  getAllCodes(): PromoCode[] {
+  getAllCodes(storeName: string): PromoCode[] {
+
+    this.http.get<PromoCode[]>(this.baseUrl.concat(this.CODE_API, storeName), { responseType: 'json' })
+      .subscribe((data: PromoCode[]) => {
+        this.discountCodeList = data;
+      });
+      
     return this.discountCodeList;
   }
+
 
   // // TODO: return discount code by id
   // getCodeById(id: number): PromoCode | undefined {
   //   return this.discountCodeList.find(dc => dc.id === id);
   // }
 
+
   // Get discount code by code name/string
   getDiscountCodeByName(dc: string): PromoCode | undefined {
     return this.discountCodeList.find(cc => cc.code === dc);
   }
+
 
   // Method to send form data
   sendCode(firstName: string, lastName: string, email: string) {
     console.log(`Discount Code application received: firstName: ${firstName}, lastName: ${lastName}, email: ${email}.`);
   }
 
+
   public getStatus(): any {
     return this.http.get<any[]>(
-      this.baseUrl,
+      (this.baseUrl.concat(this.STATUS_API)),
       {responseType: 'text' as 'json'});
+  }
+
+
+  // Authenticate user and return login response here for now
+  // Later, we can decouple this to an AuthService
+  authenticateUser() {
+
+    const loginData = {
+      // username: "<username>",
+      // password: "<password>"
+    };
+
+    // return this.http.post<LoginResponse>(
+    //   (this.AUTH_API.concat(this.LOGIN_API)),
+    //   loginData
+    // );
+
+    this.http.post(this.AUTH_API.concat(this.LOGIN_API), loginData);
   }
   
 }

@@ -38,8 +38,8 @@ export class Home implements OnInit {
     // });
     this.getStatus();
     this.getFilteredList();
-    // this.discountCodeList = this.discountService.getAllCodes();
-    // this.filteredDiscountList = this.discountCodeList;
+    this.discountService.authenticateUser();
+    this.filteredDiscountList = this.discountCodeList;
   }
 
   public getStatus() {
@@ -56,6 +56,8 @@ export class Home implements OnInit {
   onSearch(): void {
     console.log('Status: ', this.status)
     console.log('Searching for: ', this.searchStore);
+    this.discountCodeList = this.discountService.getAllCodes(this.searchStore);
+    this.filteredDiscountList = this.discountCodeList;
   }
 
   filterResults(text: string) {
