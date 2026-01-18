@@ -50,6 +50,10 @@ export class PromoService{
       .subscribe((data: PromoCode[]) => {
         this.discountCodeList = data;
       });
+
+      for (let code of this.discountCodeList) {
+        console.log('Code fetched: ', code);
+      }
       
     return this.discountCodeList;
   }
