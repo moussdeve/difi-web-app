@@ -4,15 +4,16 @@ import { Component, signal, OnInit } from '@angular/core';
 
 import { PromoService } from '../PromoService'
 import { PromoCode } from '../PromoCode';
-import { EntityDiscountCode } from '../entity-discount-code/entity-discount-code';
+import { RouterLink } from "@angular/router";
+// import { EntityDiscountCode } from '../entity-discount-code/entity-discount-code';
 
 @Component({
   selector: 'app-home',
   imports: [
     CommonModule,
     FormsModule,
-    EntityDiscountCode
-  ],
+    RouterLink
+],
   // template: `
   //   
   // `,

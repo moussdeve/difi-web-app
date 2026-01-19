@@ -1,3 +1,7 @@
+
+/***************************************************************************************
+* Search results grid layout styles
+***************************************************************************************/
 .results {
   display: grid;
   column-gap: 14px;
@@ -28,6 +32,10 @@ button:hover {
     background-color: #add8e6;
 }
 
+
+/***************************************************************************************
+* Screen size adjustments, responsive design, and mobile first approach
+***************************************************************************************/
 @media (min-width: 500px) and (max-width: 768px) {
   .results {
       grid-template-columns: repeat(2, 1fr);
@@ -41,4 +49,35 @@ button:hover {
   .results {
       grid-template-columns: 1fr;
   }    
+}
+
+
+/***************************************************************************************
+* Home table styles 
+***************************************************************************************/
+table {
+  font-size: 0.8em;
+  letter-spacing: 1px;
+  font-family: sans-serif;
+  border-collapse: collapse;
+  /* border: 2px solid rgb(140, 140, 140) */
+}
+
+caption {
+  padding: 10px;
+  font-weight: bold;
+  caption-side: bottom;
+}
+
+thead {
+  background-color: rgb(228 240 245);
+}
+
+th, td {
+  padding: 8px 10px;
+  border: 1px solid rgb(160 160 160);
+}
+
+tbody tr:nth-child(even) {
+  background-color: rgb(237 238 242);
 }

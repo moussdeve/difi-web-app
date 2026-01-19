@@ -13,12 +13,35 @@
     <button class="primary" type="button" (click)="filterResults(filter.value)">Filter</button>
   </section>
 
+  <br/>
+
   <section class="reults">
-    @for (discountCode of filteredDiscountList; track discountCode.code) {
+    <table>
+      <thead>
+        <tr>
+          <th scope="col">Code</th>
+          <th scope="col">Discount</th>
+          <th scope="col">Type</th>
+          <th scope="col">Summary</th>
+        </tr>
+      </thead>  
+      <tbody>
+        @for (discountCode of filteredDiscountList; track discountCode.code) {
+          <tr>
+            <td>{{ discountCode.code }}</td>
+            <td>{{ discountCode.discount }}</td>
+            <td>{{ discountCode.type }}</td>
+            <td>{{ discountCode.summary }}</td>
+            <td><a [routerLink]="['/details', discountCode.code]">View Details</a></td>
+          </tr>
+        }
+      </tbody>
+    </table>
+    <!-- @for (discountCode of filteredDiscountList; track discountCode.code) {
       <app-entity-discount-code 
         [discountCode]="discountCode">
       </app-entity-discount-code>
-    }
+    } -->
   </section>
 
 </main>
