@@ -4,6 +4,9 @@
 import { inject, Injectable, OnInit } from '@angular/core';
 import { PromoCode } from './PromoCode';
 import { HttpClient } from '@angular/common/http';
+import { environment } from '../environments/environment';
+import { A } from '@angular/cdk/keycodes';
+import { stat } from 'fs';
 
 
 // Login response interface
@@ -27,14 +30,6 @@ export class PromoService{
 
   private http = inject(HttpClient);
 
-  // DAP-AUTH API endpoints
-  private readonly LOGIN_API = "/login";
-  private readonly AUTH_API = "http://localhost:8080/dap/api/v1.0/auth";
-
-  // DAP-DES API endpoints
-  private readonly CODE_API = "/promoco?store=";
-  private readonly STATUS_API = "/status";
-  private readonly baseUrl = "http://localhost:8080/dap/api/v1.0/des";
 
   discountCodeList: PromoCode[] = [];
   private loginResponse: LoginResponse | undefined;
@@ -43,17 +38,24 @@ export class PromoService{
 
   // Returns all discount codes associated with the store
   getAllCodes(storeName: string): PromoCode[] {
+    const url = environment.desPromocodeApiUrl.concat(storeName);
 
-    this.http.get<PromoCode[]>(this.baseUrl.concat(this.CODE_API, storeName), {
+    console.log('Fetching all promo codes for store: ', storeName, ' ...');
+    console.log('Using API URL: ', url, ' ...');
+
+    try {
+
+      this.http.get<PromoCode[]>(url, {
         withCredentials: true
-    })
+      })
       .subscribe((data: PromoCode[]) => {
         this.discountCodeList = data;
       });
 
-      for (let code of this.discountCodeList) {
-        console.log('Code fetched: ', code);
-      }
+    } catch (error) {
+      console.error('Error fetching promo codes for store: ', storeName, ' ...');
+      this.discountCodeList = [];
+    }
       
     return this.discountCodeList;
   }
@@ -78,9 +80,24 @@ export class PromoService{
 
 
   public getStatus(): any {
-    return this.http.get<any[]>(
-      (this.baseUrl.concat(this.STATUS_API)),
-      {responseType: 'text' as 'json'});
+    console.log('Fetching service status ...');
+
+    let status: any;
+
+    try {
+
+      status = this.http.get<any>(
+        (environment.desStatusApiUrl),
+        {responseType: 'text' as 'json'});
+
+    } catch (error) {
+      console.error('Error fetching status ...');
+      status = {status: 'ERROR', timestamp: new Date().toISOString()};
+    }
+    finally {
+      return status;
+    }
+    
   }
 
 
@@ -98,7 +115,7 @@ export class PromoService{
     //   loginData
     // );
 
-    this.http.post(this.AUTH_API.concat(this.LOGIN_API), loginData);
+    this.http.post(environment.authLoginUrl, loginData);
   }
   
 }

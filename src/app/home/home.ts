@@ -33,20 +33,17 @@ export class Home implements OnInit {
   constructor(private discountService: PromoService) {}
 
   async ngOnInit() {
-    // (await this.discountService.getStatus()).subscribe((data: any) => {
-    //   this.status = data;
-    //   console.log('Service status data: ', this.status);
-    // });
+
     this.getStatus();
     this.getFilteredList();
     this.discountService.authenticateUser();
     this.filteredDiscountList = this.discountCodeList;
+    
   }
 
   public getStatus() {
     this.discountService.getStatus().subscribe((data: any) => {
       this.status = data;
-      console.log('Service status data: ', this.status);
     });
   }
 
