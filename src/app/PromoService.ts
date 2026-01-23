@@ -30,6 +30,7 @@ export class PromoService{
 
   private http = inject(HttpClient);
 
+  // Cache data for promo codes
   private promosCache: PromoCode[] | null= null;
   private caches: Record<string, PromoCode[]> = {};
   discountCodeList: PromoCode[] = [];
@@ -95,9 +96,9 @@ export class PromoService{
       })
       .subscribe((data: PromoCode[]) => {
         this.discountCodeList = data;
-        for (let i = 0; i < data.length; i++) {
-          console.log('Fetched Promo Code: ', data[i]);
-        }
+        // for (let i = 0; i < data.length; i++) {
+        //   console.log('Fetched Promo Code: ', data[i]);
+        // }
         this.setCache(storeName, data);
       });
 
