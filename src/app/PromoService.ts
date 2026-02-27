@@ -5,6 +5,7 @@ import { inject, Injectable, OnInit } from '@angular/core';
 import { PromoCode } from './PromoCode';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../environments/environment';
+import { BehaviorSubject } from 'rxjs';
 import { A } from '@angular/cdk/keycodes';
 import { stat } from 'fs';
 
@@ -33,7 +34,8 @@ export class PromoService{
   // Cache data for promo codes
   private promosCache: PromoCode[] | null= null;
   private caches: Record<string, PromoCode[]> = {};
-  discountCodeList: PromoCode[] = [];
+  private discountCodeList = new BehaviorSubject<PromoCode[]>([]);
+  currentMessage = this.discountCodeList.asObservable();
   private loginResponse: LoginResponse | undefined;
 
   constructor() {}
@@ -95,7 +97,7 @@ export class PromoService{
         withCredentials: true
       })
       .subscribe((data: PromoCode[]) => {
-        this.discountCodeList = data;
+        this.discountCodeList.next(data);
         // for (let i = 0; i < data.length; i++) {
         //   console.log('Fetched Promo Code: ', data[i]);
         // }
@@ -104,7 +106,7 @@ export class PromoService{
 
     } catch (error) {
       console.error('Error fetching promo codes for store: ', storeName, ' ...');
-      this.discountCodeList = [];
+      this.discountCodeList.next([]);
       this.clearCache(storeName);
     }
     
@@ -121,7 +123,7 @@ export class PromoService{
 
   // Get discount code by code name/string
   getDiscountCodeByName(dc: string): PromoCode | undefined {
-    return this.discountCodeList.find(cc => cc.code === dc);
+    return this.discountCodeList.getValue().find(cc => cc.code === dc);
   }
 
 

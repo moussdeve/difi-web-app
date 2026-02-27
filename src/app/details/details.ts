@@ -27,14 +27,14 @@ export class Details {
     email: new FormControl('')
   });
 
-  constructor() {
+  constructor(private shared: PromoService) {
     const discountCodeName = String(this.route.snapshot.params['code']);
-    this.discountCode = this.discountService.getDiscountCodeByName(discountCodeName);
+    this.discountCode = this.shared.getDiscountCodeByName(discountCodeName);
   }
 
   // Handle Send Click
   sendCode() {
-    this.discountService.sendCode(
+    this.shared.sendCode(
       this.sendCodeForm.value.firstName ?? '',
       this.sendCodeForm.value.lastName ?? '',
       this.sendCodeForm.value.email ?? ''
